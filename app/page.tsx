@@ -62,7 +62,9 @@ export default function Home() {
   return (
     <main>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleDownload}>Download selected images</button>
+      <button onClick={handleDownload}>
+        Download Overlay of Selected Images
+      </button>
       {images.map((image, index) => (
         <div key={index} className="p-5 flex items-center">
           <input
