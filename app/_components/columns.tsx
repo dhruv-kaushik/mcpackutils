@@ -66,7 +66,7 @@ export const columns: ColumnDef<PackData>[] = [
   },
   {
     accessorKey: "pack_file",
-    header: "Image File",
+    header: "File",
     cell: ({ row }) => {
       if (!(row.getValue("pack_location") as string).endsWith(".png")) {
         return (

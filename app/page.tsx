@@ -1,8 +1,5 @@
 "use client";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { MainPackOverlay } from "./_components/main";
-import { Badge } from "@/components/ui/badge";
-import { AvatarFallback } from "@radix-ui/react-avatar";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 export default function Home() {
   return (
@@ -12,53 +9,55 @@ export default function Home() {
           <div className="flex items-center justify-center p-5">
             <h1 className="p-2 rounded-md text-4xl font-bold text-[#23272a] tracking-wide uppercase">
               {" "}
-              The Best Way to Make
+              The
               {"   "}
               <span className="bg-[#5865f2] p-2 rounded-md text-4xl font-bold text-white tracking-wide uppercase">
-                Pack Overlays.
+                Best
               </span>
+              {"  "}Way to Make Pack Overlays.
             </h1>
           </div>
           <MainPackOverlay />
         </div>
-        <footer className="flex items-center justify-between p-5 bg-[#23272a] text-white">
-          <div className="flex flex-col space-y-4">
-            <a
-              href="https://www.github.com/dhruv-kaushik"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-green-600"
-            >
-              <FaGithub size={24} />
-            </a>
-            <a
-              href="https://www.twitter.com/tabah_i"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#1DA1F2]"
-            >
-              <FaTwitter size={24} />
-            </a>
-          </div>
-          <div className="text-center ml-48 bg-[#ed4245] font-bold p-3 uppercase">
-            <p>Texture Packs are not stored in this process</p>{" "}
-          </div>
-          <div className="flex items-center">
-            <Avatar>
-              <AvatarImage
-                src="https://github.com/dhruv-kaushik/mcpackutils/blob/main/public/avatar.png"
+        <div>
+          <footer className="flex items-center justify-between p-5 bg-[#23272a] text-white">
+            <div className="flex items-center space-x-4">
+              <img
+                src="/avatar.png"
                 alt="@tabahi"
+                className="w-12 h-12 rounded-full"
               />
-              <AvatarFallback>A</AvatarFallback>
-            </Avatar>
-            <div className="ml-2">
-              <div className="font-bold">Made by Tabahi</div>
-              <div className="space-x-2">
-                <Badge variant="secondary">Web Developer</Badge>
+              <div>
+                <div className="font-bold">Made by Tabahi</div>
+                <div className="flex space-x-2">
+                  <a
+                    href="https://github.com/dhruv-kaushik"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaGithub size={24} />
+                  </a>
+                  <a
+                    href="https://twitter.com/tabah_i"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaTwitter size={24} />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        </footer>
+            <div>
+              <a
+                href="https://github.com/dhruv-kaushik/mcpackutils"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Source Code
+              </a>
+            </div>
+          </footer>
+        </div>
       </div>
     </>
   );

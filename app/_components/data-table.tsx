@@ -64,9 +64,28 @@ export function DataTable<TData, TValue>({
   });
   const handleDownload = async () => {
     const zip = new JSZip();
+    let packmeta;
+    table.getSortedRowModel().rows.forEach((row: any) => {
+      if ((row.original.pack_location as string) === "pack.mcmeta") {
+        packmeta = row.getValue("pack_file");
+      }
+    });
+
     table.getFilteredSelectedRowModel().rows.forEach((row: any) => {
+      if ((row.original.pack_location as string) === "pack.mcmeta") return;
+
       zip.file(row.original.pack_location, row.original.pack_file);
     });
+    let packMetaJson = JSON.parse(await new Response(packmeta).text());
+    zip.file(
+      "pack.mcmeta",
+      JSON.stringify({
+        pack: {
+          pack_format: packMetaJson.pack.pack_format || 1,
+          description: "Overlay Pack made using mcpackutils.vercel.app.",
+        },
+      })
+    );
     const content = await zip.generateAsync({ type: "blob" });
     saveAs(content, "pack_overlay.zip");
   };

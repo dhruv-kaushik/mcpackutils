@@ -1,1 +1,1 @@
-Texture Pack Overlay Maker by Tabahi
+# Texture Pack Utilities by Tabahi
