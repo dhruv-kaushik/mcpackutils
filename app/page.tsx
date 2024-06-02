@@ -10,7 +10,7 @@ export default function Home() {
       <div className="flex flex-col min-h-screen">
         <div className="flex-grow">
           <div className="flex items-center justify-center p-5">
-            <h1 className="p-2 rounded-md text-4xl font-bold text-black tracking-wide uppercase">
+            <h1 className="p-2 rounded-md text-4xl font-bold text-[#23272a] tracking-wide uppercase">
               {" "}
               The Best Way to Make
               {"   "}
@@ -45,7 +45,10 @@ export default function Home() {
           </div>
           <div className="flex items-center">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@tabahi" />
+              <AvatarImage
+                src="https://github.com/dhruv-kaushik/mcpackutils/blob/main/public/avatar.png"
+                alt="@tabahi"
+              />
               <AvatarFallback>A</AvatarFallback>
             </Avatar>
             <div className="ml-2">

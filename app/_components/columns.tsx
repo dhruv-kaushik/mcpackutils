@@ -1,5 +1,14 @@
 "use client";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
@@ -25,14 +34,16 @@ export const columns: ColumnDef<PackData>[] = [
         aria-label="Select all"
       />
     ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: true,
+    cell: ({ row }) => {
+      return (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      );
+    },
+    enableSorting: false,
     enableHiding: false,
   },
   {
@@ -56,15 +67,45 @@ export const columns: ColumnDef<PackData>[] = [
   {
     accessorKey: "pack_file",
     header: "Image File",
-    cell: ({ row }) => (
-      <a href={URL.createObjectURL(row.getValue("pack_file"))}>
-        <Image
-          alt="hi"
-          src={URL.createObjectURL(row.getValue("pack_file"))}
-          width={50}
-          height={50}
-        />
-      </a>
-    ),
+    cell: ({ row }) => {
+      if (!(row.getValue("pack_location") as string).endsWith(".png")) {
+        return (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="ghost"
+                className="text-[#5865f2] underline hover:text-blue-700"
+              >
+                Link
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>{row.getValue("pack_name")}</AlertDialogTitle>
+                <AlertDialogDescription>
+                  {new Response(row.getValue("pack_file")).text()}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogAction>Exit</AlertDialogAction>
+            </AlertDialogContent>
+          </AlertDialog>
+        );
+      } else {
+        return (
+          <a
+            href={URL.createObjectURL(row.getValue("pack_file"))}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              alt="hi"
+              src={URL.createObjectURL(row.getValue("pack_file"))}
+              width={50}
+              height={50}
+            />
+          </a>
+        );
+      }
+    },
   },
 ];

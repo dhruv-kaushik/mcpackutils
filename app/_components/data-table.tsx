@@ -29,7 +29,6 @@ import saveAs from "file-saver";
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -82,10 +81,10 @@ export function DataTable<TData, TValue>({
           type="search"
           placeholder="Filter Textures..."
           value={
-            (table.getColumn("pack_name")?.getFilterValue() as string) ?? ""
+            (table.getColumn("pack_location")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("pack_name")?.setFilterValue(event.target.value)
+            table.getColumn("pack_location")?.setFilterValue(event.target.value)
           }
           className="max-w-sm focus-visible:ring-gray-500 focus-visible:ring-1"
         />
