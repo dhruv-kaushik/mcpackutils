@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import Image from "next/image";
 
 export type PackData = {
   pack_name: string;
@@ -31,7 +32,7 @@ export const columns: ColumnDef<PackData>[] = [
         aria-label="Select row"
       />
     ),
-    enableSorting: false,
+    enableSorting: true,
     enableHiding: false,
   },
   {
@@ -55,5 +56,15 @@ export const columns: ColumnDef<PackData>[] = [
   {
     accessorKey: "pack_file",
     header: "Image File",
+    cell: ({ row }) => (
+      <a href={URL.createObjectURL(row.getValue("pack_file"))}>
+        <Image
+          alt="hi"
+          src={URL.createObjectURL(row.getValue("pack_file"))}
+          width={50}
+          height={50}
+        />
+      </a>
+    ),
   },
 ];

@@ -7,6 +7,7 @@ import {
   getSortedRowModel,
   ColumnFiltersState,
   getFilteredRowModel,
+  getPaginationRowModel,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -25,6 +26,15 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import JSZip from "jszip";
 import saveAs from "file-saver";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -44,6 +54,7 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
+    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
@@ -53,7 +64,6 @@ export function DataTable<TData, TValue>({
     },
   });
   const handleDownload = async () => {
-    //TODO: generate a texture pack info file
     const zip = new JSZip();
     table.getFilteredSelectedRowModel().rows.forEach((row: any) => {
       zip.file(row.original.pack_location, row.original.pack_file);
@@ -79,9 +89,27 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm focus-visible:ring-gray-500 focus-visible:ring-1"
         />
-        <Button variant="outline" onClick={handleDownload}>
-          Download Overlay of Selected Images
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="mybutton"
+              onClick={(e) => {
+                if (table.getFilteredSelectedRowModel().rows.length) {
+                  e.preventDefault();
+                  handleDownload();
+                }
+              }}
+            >
+              Download Overlay of Selected Textures
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>No Texture Selected.</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogAction>Ok</AlertDialogAction>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -132,6 +160,24 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+      </div>
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
       </div>
     </div>
   );
