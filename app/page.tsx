@@ -24,18 +24,18 @@ export default function Home() {
         <footer className="flex items-center justify-between p-5 bg-[#23272a] text-white">
           <div className="flex flex-col space-y-4">
             <a
-              href="https://www.facebook.com/yourusername"
+              href="https://www.github.com/dhruv-kaushik"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-green-600" // Facebook's brand color
+              className="hover:text-green-600"
             >
               <FaGithub size={24} />
             </a>
             <a
-              href="https://www.twitter.com/yourusername"
+              href="https://www.twitter.com/tabah_i"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#1DA1F2]" // Twitter's brand color
+              className="hover:text-[#1DA1F2]"
             >
               <FaTwitter size={24} />
             </a>
