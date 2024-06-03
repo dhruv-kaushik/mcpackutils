@@ -1,6 +1,8 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { MainPackOverlay } from "./_components/main";
 import { FaGithub, FaTwitter } from "react-icons/fa";
+import { Code2Icon } from "lucide-react";
 export default function Home() {
   return (
     <>
@@ -53,7 +55,10 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Source Code
+                <Button variant="link" className="text-white">
+                  <Code2Icon size={24} className="mr-2" />
+                  Source Code
+                </Button>
               </a>
             </div>
           </footer>

@@ -30,7 +30,7 @@ export const columns: ColumnDef<PackData>[] = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(value) => table.toggleAllRowsSelected(!!value)}
         aria-label="Select all"
       />
     ),
@@ -61,6 +61,10 @@ export const columns: ColumnDef<PackData>[] = [
     },
   },
   {
+    filterFn: (row, id, value) => {
+      const rowValue = row.getValue(id);
+      return rowValue ? rowValue.toString().includes(value) : false;
+    },
     accessorKey: "pack_location",
     header: "location",
   },
