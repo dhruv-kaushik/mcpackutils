@@ -1,8 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { MainPackOverlay } from "./_components/main";
-import { FaGithub, FaTwitter } from "react-icons/fa";
+import {
+  GitHubLogoIcon,
+  TwitterLogoIcon,
+  DiscordLogoIcon,
+} from "@radix-ui/react-icons";
 import { Code2Icon } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
 export default function Home() {
   return (
     <>
@@ -13,7 +18,7 @@ export default function Home() {
               {" "}
               The
               {"   "}
-              <span className="bg-[#5865f2] p-2 rounded-md text-4xl font-bold text-white tracking-wide uppercase">
+              <span className="bg-[#5865f2] p-2 rounded-sm text-4xl font-bold text-white tracking-wide uppercase">
                 Best
               </span>
               {"  "}Way to Make Pack Overlays.
@@ -36,15 +41,25 @@ export default function Home() {
                     href="https://github.com/dhruv-kaushik"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="transition-colors duration-300 ease-in-out hover:text-[#57f287]"
                   >
-                    <FaGithub size={24} />
+                    <GitHubLogoIcon width={24} height={24} />
                   </a>
                   <a
                     href="https://twitter.com/tabah_i"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="transition-colors duration-300 ease-in-out text-white hover:text-[#1DA1F2]"
                   >
-                    <FaTwitter size={24} />
+                    <TwitterLogoIcon width={25} height={25} />
+                  </a>
+                  <a
+                    href="https://discord.gg/tvQZKq7Wax"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors duration-300 ease-in-out text-white hover:text-[#5865f2]"
+                  >
+                    <FaDiscord size={24} />
                   </a>
                 </div>
               </div>
@@ -55,9 +70,12 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="link" className="text-white">
-                  <Code2Icon size={24} className="mr-2" />
-                  Source Code
+                <Button
+                  variant="link"
+                  className="text-white hover:text-[#57f287]"
+                >
+                  <Code2Icon size={24} className="mr-2 hover:text-green-400" />
+                  Src
                 </Button>
               </a>
             </div>

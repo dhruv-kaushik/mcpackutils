@@ -50,10 +50,7 @@ export const columns: ColumnDef<PackData>[] = [
     accessorKey: "pack_name",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
+        <Button variant="ghost" onClick={() => column.toggleSorting()}>
           Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
@@ -87,7 +84,7 @@ export const columns: ColumnDef<PackData>[] = [
               <AlertDialogHeader>
                 <AlertDialogTitle>{row.getValue("pack_name")}</AlertDialogTitle>
                 <AlertDialogDescription>
-                  {new Response(row.getValue("pack_file")).text()}
+                  {new Response(row.getValue("pack_file")).text().then((text) => JSON.stringify(JSON.parse(text),null,2))}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogAction>Exit</AlertDialogAction>

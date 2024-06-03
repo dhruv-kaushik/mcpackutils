@@ -23,9 +23,8 @@ import {
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import JSZip from "jszip";
-import saveAs from "file-saver";
 import DataTableHeader from "./data-table-header";
+import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -45,6 +44,8 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
+    sortDescFirst: true,
+    enableSortingRemoval: false,
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
@@ -114,7 +115,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          <ArrowLeftIcon />
         </Button>
         <Button
           variant="outline"
@@ -122,7 +123,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          <ArrowRightIcon />
         </Button>
       </div>
     </div>

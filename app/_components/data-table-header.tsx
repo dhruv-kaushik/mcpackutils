@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import saveAs from "file-saver";
 import JSZip from "jszip";
 import { DataTableFacetedFilter } from "./data-table-filter";
+import { Cross2Icon } from "@radix-ui/react-icons";
 
 export default function DataTableHeader({ table }: { table: any }) {
   const handleDownload = async () => {
@@ -41,6 +42,7 @@ export default function DataTableHeader({ table }: { table: any }) {
     const content = await zip.generateAsync({ type: "blob" });
     saveAs(content, "pack_overlay.zip");
   };
+  const isFiltered = table.getState().columnFilters.length > 0;
   return (
     <div>
       <div className="flex-1 text-sm text-muted-foreground">
@@ -70,6 +72,16 @@ export default function DataTableHeader({ table }: { table: any }) {
                 { label: "Menu", value: "gui" },
               ]}
             />
+          )}
+          {isFiltered && (
+            <Button
+              variant="ghost"
+              onClick={() => table.resetColumnFilters()}
+              className="h-8 px-2 lg:px-3"
+            >
+              Reset
+              <Cross2Icon className="ml-2 h-4 w-4" />
+            </Button>
           )}
         </div>
         <AlertDialog>

@@ -47,7 +47,7 @@ export function MainPackOverlay() {
       let packData = await Promise.all(packDataPromises);
       packData = packData.sort((a, b) =>
         a.pack_name.localeCompare(b.pack_name)
-      ); 
+      );
       setData(packData);
       setLoading(false);
     };
