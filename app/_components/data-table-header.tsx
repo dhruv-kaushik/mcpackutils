@@ -17,7 +17,8 @@ export default function DataTableHeader({ table }: { table: any }) {
   const handleDownload = async () => {
     const zip = new JSZip();
     let packmeta;
-    table.getSortedRowModel().rows.forEach((row: any) => {
+    table.getCoreRowModel().rows.forEach((row: any) => {
+      console.log(row.original.pack_location);
       if ((row.original.pack_location as string) === "pack.mcmeta") {
         packmeta = row.getValue("pack_file");
       }
