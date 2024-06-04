@@ -84,7 +84,14 @@ export const columns: ColumnDef<PackData>[] = [
               <AlertDialogHeader>
                 <AlertDialogTitle>{row.getValue("pack_name")}</AlertDialogTitle>
                 <AlertDialogDescription>
-                  {new Response(row.getValue("pack_file")).text().then((text) => JSON.stringify(JSON.parse(text),null,2))}
+                  {new Response(row.getValue("pack_file"))
+                    .text()
+                    .then((text) =>
+                      row.getValue.toString().endsWith(".json") ||
+                      row.getValue.toString().endsWith(".json")
+                        ? JSON.stringify(JSON.parse(text), null, 2)
+                        : text
+                    )}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogAction>Exit</AlertDialogAction>

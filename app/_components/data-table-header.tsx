@@ -70,6 +70,7 @@ export default function DataTableHeader({ table }: { table: any }) {
               options={[
                 { label: "Blocks", value: "block" },
                 { label: "Sky", value: "sky" },
+                { label: "Sword", value: "sword" },
                 { label: "Menu", value: "gui" },
               ]}
             />

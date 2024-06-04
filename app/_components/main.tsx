@@ -28,7 +28,9 @@ export function MainPackOverlay() {
           if (file.dir) return false;
           const fileName = file.name.split("/").pop() || "";
           const fileExtension = fileName.split(".").pop() || "";
-          return ["mcmeta", "png", "json"].includes(fileExtension);
+          return ["mcmeta", "png", "json", "properties"].includes(
+            fileExtension
+          );
         })
         .map((file) =>
           file.async("base64").then((data) => {
