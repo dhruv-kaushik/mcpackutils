@@ -45,7 +45,7 @@ export default function Page() {
                     <img
                       src="https://via.placeholder.com/128"
                       alt={pack.file.name}
-                      className="w-16 h-20 object-cover mr-3"
+                      className="w-20 h-20 object-cover mr-3"
                     />
                     <div>
                       <h2 className="mt-2 text-xl">{pack.file.name}</h2>
