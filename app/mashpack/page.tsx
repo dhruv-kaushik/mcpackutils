@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Page() {
-  const [packs, setPacks] = useState<{ file: File; mcMeta: string }[]>([]);
+  const [packs, setPacks] = useState<
+    { file: File; mcMeta: string; packPng: Blob }[]
+  >([]);
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
@@ -20,8 +22,10 @@ export default function Page() {
       const data = await zip.loadAsync(file);
 
       const mcMeta = await data.file("pack.mcmeta")?.async("text");
+      const packPng = await data.file("pack.png")?.async("blob");
       if (!mcMeta) return alert("Invalid Texture PAck");
-      newPacks.push({ file, mcMeta });
+      if (!packPng) return alert("Invalid Texture PAck");
+      newPacks.push({ file, mcMeta, packPng });
     }
 
     setPacks(newPacks);
@@ -42,10 +46,12 @@ export default function Page() {
               return (
                 <div className="grid grid-cols-3 p-2">
                   <div className="bg-black text-white flex items-center">
-                    <img
-                      src="https://via.placeholder.com/128"
+                    <Image
+                      src={URL.createObjectURL(pack.packPng)}
                       alt={pack.file.name}
-                      className="w-20 h-20 object-cover mr-3"
+                      width={96}
+                      height={96}
+                      className="object-cover mr-3"
                     />
                     <div>
                       <h2 className="mt-2 text-xl">{pack.file.name}</h2>
