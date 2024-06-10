@@ -1,7 +1,7 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import JSZip from "jszip";
-import { ArrowRightSquareIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -14,7 +14,7 @@ export default function Page() {
     console.log(files);
     if (!files) return;
 
-    const newPacks = [];
+    const newPacks: any = [];
     for (const file of files) {
       if (!file.name.endsWith(".zip")) {
         alert("Only zip files are allowed");
@@ -29,17 +29,26 @@ export default function Page() {
       if (!mcMeta) return alert("Invalid Texture PAck");
       if (!data) return alert("Invalid Texture PAck");
       if (!packPng) return alert("Invalid Texture PAck");
+
       newPacks.push({ fileName, data, mcMeta, packPng });
     }
 
-    setPacks(newPacks);
+    setPacks((prevPacks) => {
+      // Filter out any new packs that already exist in prevPacks
+      const uniquePacks = newPacks.filter(
+        (newPack: any) =>
+          !prevPacks.some((prevPack) => prevPack.fileName === newPack.fileName)
+      );
+
+      return [...prevPacks, ...uniquePacks];
+    });
   };
   return (
-    <div>
+    <div className="p-4">
       <Input type="file" multiple onChange={handleFileChange} />
-      <div>
+      <div className="mt-4 grid grid-cols-1 gap-4">
         {packs.map((pack, i) => (
-          <div key={i}>
+          <div key={i} className="bg-gray-100 shadow-lg rounded-lg p-4">
             {(() => {
               try {
                 const mcMetaWithoutBOM = pack.mcMeta.replace(/^\uFEFF/, "");
@@ -49,21 +58,19 @@ export default function Page() {
                 );
                 const parsedJson = JSON.parse(mcMetaWithoutControlChars);
                 return (
-                  <div className="grid grid-cols-3 p-2">
-                    <div className="bg-black text-white flex items-center">
-                      <Image
-                        src={URL.createObjectURL(pack.packPng)}
-                        alt={pack.fileName}
-                        width={96}
-                        height={96}
-                        className="object-cover mr-3"
-                      />
-                      <div>
-                        <h2 className="mt-2 text-xl">{pack.fileName}</h2>
-                        <p className="text-sm">
-                          {parsedJson.pack.description.replace(/§./g, "")}
-                        </p>
-                      </div>
+                  <div className="flex items-center">
+                    <Image
+                      src={URL.createObjectURL(pack.packPng)}
+                      alt={pack.fileName}
+                      width={96}
+                      height={96}
+                      className="object-cover mr-4"
+                    />
+                    <div>
+                      <h2 className="text-xl font-bold">{pack.fileName}</h2>
+                      <p className="text-sm text-gray-600">
+                        {parsedJson.pack.description.replace(/§./g, "")}
+                      </p>
                     </div>
                   </div>
                 );
@@ -74,8 +81,10 @@ export default function Page() {
             })()}
           </div>
         ))}
-        <ArrowRightSquareIcon className="w-10 h-10" />
       </div>
+      <Button variant="default" className="mt-4 w-full rounded-lg">
+        Start Pack Mashup
+      </Button>
     </div>
   );
 }
