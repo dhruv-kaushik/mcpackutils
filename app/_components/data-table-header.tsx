@@ -32,12 +32,12 @@ export default function DataTableHeader({ table }: { table: any }) {
 
     
 
-    let packMetaJson = JSON.parse(await new Response(packmeta).text() || "{}");
+    let packMetaJson = JSON.parse(await new Response(packmeta).text());
     zip.file(
       "pack.mcmeta",
       JSON.stringify({
         pack: {
-          pack_format: packMetaJson.pack.pack_format ? packMetaJson.pack.pack_format : 1,
+          pack_format: packMetaJson.pack.pack_format,
           description: "Overlay Pack made using mcpackutils.vercel.app.",
         },
       })
