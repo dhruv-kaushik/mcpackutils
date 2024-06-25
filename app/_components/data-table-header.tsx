@@ -29,10 +29,10 @@ export default function DataTableHeader({ table }: { table: any }) {
 
       zip.file(row.original.pack_location, row.original.pack_file);
     });
-    if(!packmeta) return alert('MC META DOESNT EXIST!')
+
     
 
-    let packMetaJson = JSON.parse(await new Response(packmeta).text());
+    let packMetaJson = JSON.parse(await new Response(packmeta).text()) || {};
     zip.file(
       "pack.mcmeta",
       JSON.stringify({
