@@ -37,7 +37,7 @@ export default function DataTableHeader({ table }: { table: any }) {
       "pack.mcmeta",
       JSON.stringify({
         pack: {
-          pack_format: packMetaJson.pack.pack_format || 1,
+          pack_format: packMetaJson.pack.pack_format ? packMetaJson.pack.pack_format : 1,
           description: "Overlay Pack made using mcpackutils.vercel.app.",
         },
       })
