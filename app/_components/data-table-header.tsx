@@ -32,7 +32,7 @@ export default function DataTableHeader({ table }: { table: any }) {
 
     
 
-    let packMetaJson = JSON.parse(await new Response(packmeta).text()) || {};
+    let packMetaJson = JSON.parse(await new Response(packmeta).text() || "{}");
     zip.file(
       "pack.mcmeta",
       JSON.stringify({
